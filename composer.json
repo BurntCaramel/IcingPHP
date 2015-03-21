@@ -12,8 +12,8 @@
 			"BurntCaramel\\Glaze": "src/"
 		}
 	},
-    "config": {
-        "vendor-dir" : "vendor"
-    },
-    "minimum-stability": "dev"
+	"config": {
+		"vendor-dir" : "vendor"
+	},
+	"minimum-stability": "dev"
 }
