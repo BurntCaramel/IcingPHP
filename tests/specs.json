@@ -1,0 +1,355 @@
+{
+	"icingStandard": {"id": "burnticing", "version": "0.1.0"},
+	"specsIdentifier": {"id": "burntcaramel", "version": "1.0.0"},
+	"subsectionTypes": [
+		{
+			"id": "normal",
+			"title": "Normal"
+		},
+		{
+			"id": "unorderedList",
+			"title": "Unordered List",
+			"outerHTMLTagName": "ul",
+			"innerHTMLRepresentation": [
+				{
+					"tagName": "li",
+					"children": [
+						{
+							"placeOriginalElement": true
+						}
+					]
+				}
+			],
+			"blockHTMLOptions": {
+				"noParagraphs": true
+			}
+		},
+		{
+			"id": "orderedList",
+			"title": "Ordered List",
+			"outerHTMLTagName": "ol",
+			"innerHTMLRepresentation": [
+				{
+					"tagName": "li",
+					"children": [
+						{
+							"placeOriginalElement": true
+						}
+					]
+				}
+			],
+			"blockHTMLOptions": {
+				"noParagraphs": true
+			}
+		},
+		{
+			"id": "quote",
+			"title": "Quote",
+			"outerHTMLTagName": "blockquote"
+		}
+	],
+	"defaultSectionType": "normal",
+	"blockTypesByGroups": {
+		"text": [
+			{"id": "body", "title": "Paragraph", "outerHTMLTagName": "p"},
+			{"id": "heading", "title": "Heading 1", "outerHTMLTagName": "h1"},
+			{"id": "subhead1", "title": "Heading 2", "outerHTMLTagName": "h2"},
+			{"id": "subhead2", "title": "Heading 3", "outerHTMLTagName": "h3"},
+			{"id": "subhead3", "title": "Heading 4", "outerHTMLTagName": "h4"}
+		],
+		"media": [
+			{
+				"id": "externalImage",
+				"title": "External Image",
+				"fieldsAreRequired": true,
+				"fields": [
+					{
+						"id": "url",
+						"type": "url",
+						"title": "Image URL"
+					},
+					{
+						"id": "width",
+						"type": "number-integer",
+						"title": "Displayed Width"
+					},
+					{
+						"id": "height",
+						"type": "number-integer",
+						"title": "Displayed Height"
+					},
+					{
+						"id": "description",
+						"type": "text",
+						"title": "Description"
+					}
+				],
+				"outerHTMLTagName": "p",
+				"innerHTMLRepresentation": [
+					{
+						"tagName": "img",
+						"attributes": {
+							"src": ["fields", "url"],
+							"width": ["fields", "width"],
+							"height": ["fields", "height"],
+							"alt": ["fields", "description"]
+						}
+					}
+				]
+			}
+		],
+		"particular[OFF]": [
+			{
+				"id": "contactDetails",
+				"title": "Contact Details",
+				"fieldsAreRequired": false,
+				"fields": [
+					{"id": "businessName", "title": "Business Name"},
+					{"id": "streetAddress", "title": "Street Address"},
+					{"id": "locality", "title": "Locality"},
+					{"id": "region", "title": "Region"},
+					{"id": "postalCode", "title": "Postal Code"},
+					{"id": "country", "title": "Country"}
+				],
+				"innerHTMLRepresentation": [
+					{
+						"tagName": "div",
+						"attributes": {
+							"itemscope": true,
+							"itemtype": "http://schema.org/Organization"
+						},
+						"children": [
+							{
+								"tagName": "div",
+								"attributes": {
+									"itemprop": "name"
+								},
+								"children": [
+									{
+										"text": ["fields", "businessName"]
+									}
+								]
+							},
+							{
+								"tagName": "div",
+								"attributes": {
+									"itemprop": "address",
+									"itemscope": true,
+									"itemtype": "http://schema.org/PostalAddress"
+								},
+								"children": [
+									{
+										"tagName": "div",
+										"children": [
+											{
+												"text": ["fields", "streetAddress"]
+											},
+											{
+												"text": ",",
+												"checkIsPresent": ["fields", "streetAddress"]
+											},
+											{
+												"text": ["fields", "suburb"]
+											},
+											{
+												"text": ["fields", "province"]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				],
+				"onlineHTMLRepresentationCreator": {
+					"POST": "contactDetails/1.0/",
+					"JavaScript": "http://representations.burnticing.org/blocks/contactDetails/1.0/contactDetails.1.0.js"
+				}
+			},
+			{
+				"id": "blikPlaceholder",
+				"title": "Blik Placeholder",
+				"choices": [
+					{
+						"id": "header",
+						"title": "Blik Header",
+						"description": "The Blik logo"
+					},
+					{
+						"id": "mac-app-store-link",
+						"title": "Blik Mac App Store Link",
+						"description": "The official-style black button linking to the Mac App Store."
+					}
+				]
+			},
+			{
+				"id": "featureHeading",
+				"title": "Feature Heading",
+				"fieldsAreRequired": true,
+				"fields": [
+					{"id": "primaryText", "title": "Primary Text"},
+					{"id": "secondaryText", "title": "Secondary Text"}
+				]
+			}
+		]
+	},
+	"traits": [
+		{
+			"id": "bold",
+			"title": "Bold",
+			"allowedForAnyTextItems": true,
+			"innerHTMLRepresentation": [
+				{
+					"tagName": "strong",
+					"children": [
+						{
+							"placeOriginalElement": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "italic",
+			"title": "Italic",
+			"allowedForAnyTextItems": true,
+			"innerHTMLRepresentation": [
+				{
+					"tagName": "em",
+					"children": [
+						{
+							"placeOriginalElement": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "link",
+			"allowedForAnyTextItems": true,
+			"allowedForBlockTypesByGroupType": {
+				"text": true,
+				"media": true,
+				"particular": true
+			},
+			"disabled": false,
+			"title": "Link",
+			"type": "fields",
+			"fields": [
+				{
+					"id": "typeChoice",
+					"title": "Link Type",
+					"type": "choice",
+					"choices": [
+						{
+							"id": "URL",
+							"title": "URL",
+							"fields": [
+								{
+									"type": "url",
+									"id": "URL",
+									"title": "URL"
+								}
+							]
+						},
+						{
+							"id": "email",
+							"title": "Email",
+							"fields": [
+								{
+									"type": "email",
+									"id": "emailAddress",
+									"title": "Email Address"
+								}
+							]
+						}
+					]
+				}
+			],
+			"innerHTMLRepresentation": [
+				{
+					"tagName": "a",
+					"attributes": {
+						"href": {
+							"firstWhichIsPresent": [
+								["fields", "typeChoice", "URL", "URL"],
+								{
+									"join": [
+										"mailto:",
+										["fields", "typeChoice", "email", "emailAddress"]
+									]
+								}
+							]
+						}
+					},
+					"children": [
+						{
+							"placeOriginalElement": true
+						}
+					]
+				}
+			],
+			"valueDescription": [
+				{
+					"checkIsPresent": ["fields", "typeChoice", "URL"],
+					"join": [
+						"Link to URL: ",
+						["fields", "typeChoice", "URL", "URL"]
+					]
+				},
+				{
+					"checkFieldPresent": ["typeChoice", "email"],
+					"join": [
+						"Link to email address: ",
+						["fields", "typeChoice", "email", "emailAddress"]
+					]
+				}
+			]
+		},
+		{
+			"id": "class",
+			"disabled": true,
+			"title": "Class",
+			"allowedForAnyTextItems": true,
+			"allowedForBlockTypesByGroupType": true,
+			"type": "fields",
+			"fields": [
+				{
+					"id": "classNames",
+					"title": "Class Names",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"id": "primary",
+			"disabled": true,
+			"title": "Primary"
+		},
+		{
+			"id": "secondary",
+			"disabled": true,
+			"title": "Secondary"
+		},
+		{
+			"id": "hide",
+			"title": "Don’t Show",
+			"allowedForAnyTextItems": true,
+			"allowedForBlockTypesByGroupType": true,
+			"innerHTMLRepresentation": null
+		}
+	],
+	"itemsByBlock": {
+		"*": {
+			"text": [
+				
+			]
+		},
+		"media": {
+			"image externalImage": [
+				{"id": "resolution-1x", "title": "1x Resolution"},
+				{"id": "resolution-2x", "title": "2x Resolution"}
+			]
+		}
+	}
+}
