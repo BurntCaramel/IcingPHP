@@ -12,7 +12,7 @@ namespace BurntIcing
 	use BurntCaramel\Glaze\Serve as GlazeServe;
 	
 	require_once(__DIR__ . '/BlockHandler.php');
-	require_once(__DIR__ . '/HTMLRepresentationDisplayer.php');
+	require_once(__DIR__ . '/HTMLRepresentationAssistant.php');
 	
 	class SpecsBlockHandler extends BlockHandler
 	{
@@ -43,7 +43,7 @@ namespace BurntIcing
 			if (!isset($innerGlazeItem)):
 				$HTMLRepresentation = burntCheck($blockTypeOptions['innerHTMLRepresentation']);
 				if (isset($HTMLRepresentation)):
-					$innerGlazeItem = HTMLRepresentationDisplayer::createGlazeContentForHTMLRepresentationAndValue($HTMLRepresentation, $valueForRepresentation);
+					$innerGlazeItem = HTMLRepresentationAssistant::createGlazeContentForHTMLRepresentationAndValue($HTMLRepresentation, $valueForRepresentation);
 				endif;
 			endif;
 			

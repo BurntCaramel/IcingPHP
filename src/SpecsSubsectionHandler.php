@@ -12,6 +12,7 @@ namespace BurntIcing
 	use BurntCaramel\Glaze\Serve as GlazeServe;
 	
 	require_once(__DIR__ . '/SubsectionHandler.php');
+	require_once(__DIR__ . '/HTMLRepresentationAssistant.php');
 	
 	class SpecsSubsectionHandler extends SubsectionHandler
 	{
@@ -50,12 +51,12 @@ namespace BurntIcing
 			$specs = $this->specs;
 			$subsectionOptions = $specs->findParticularSubsectionOptions($subsectionType);
 			
-			$HTMLRepresentation = burntCheck($subsectionOptions['innerHTMLRepresentation']);
+			$HTMLRepresentation = burntCheck($subsectionOptions['childHTMLRepresentation']);
 			if (isset($HTMLRepresentation)):
 				$valueForRepresentation = array(
 					'originalElement' => $glazeItem
 				);
-				$glazeItem = HTMLRepresentationDisplayer::createGlazeContentForHTMLRepresentationAndValue($HTMLRepresentation, $valueForRepresentation);
+				$glazeItem = HTMLRepresentationAssistant::createGlazeContentForHTMLRepresentationAndValue($HTMLRepresentation, $valueForRepresentation);
 			endif;
 		
 			return $glazeItem;

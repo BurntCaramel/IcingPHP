@@ -11,21 +11,42 @@ namespace BurntIcing
 	use BurntCaramel\Glaze\Prepare as GlazePrepare;
 	use BurntCaramel\Glaze\Serve as GlazeServe;
 	
-	class HTMLRepresentationDisplayer
+	class HTMLRepresentationAssistant
 	{
 		public static function getValueAtKeyPathInArray($keyPath, $array)
 		{
 			$nestedValue = $array;
 			foreach ($keyPath as $key):
-				//print_r($nestedValue);
-				$nestedValue = burntCheck($nestedValue[$key], null);
-				if (!isset($nestedValue)):
-					// Will return null.
+				if (!isset($nestedValue) || !is_array($nestedValue)):
+					$nestedValue = null;
 					break;
 				endif;
+				
+				//print_r($nestedValue);
+				$nestedValue = burntCheck($nestedValue[$key], null);
 			endforeach;
 		
 			return $nestedValue;
+		}
+		
+		public static function checkOptionsShouldShow($options, $sourceValue) {
+			if (isset($options['checkIsPresent'])):
+				$checkIsPresentInfo = $options['checkIsPresent'];
+				$valueToCheck = static::getAttributeValueForInfoAndSourceValue($checkIsPresentInfo, $sourceValue);
+				if (!isset($valueToCheck)):
+					return false;
+				endif;
+			endif;
+			
+			if (isset($options['checkIsFilled'])):
+				$checkIsFilledInfo = $options['checkIsFilled'];
+				$valueToCheck = static::getAttributeValueForInfoAndSourceValue($checkIsFilledInfo, $sourceValue);
+				if (!is_string($valueToCheck) || trim($valueToCheck) === ''):
+					return false;
+				endif;
+			endif;
+	
+			return true;
 		}
 	
 		public static function getAttributeValueForInfoAndSourceValue($attributeValueRepresentation, $sourceValue)
@@ -39,13 +60,9 @@ namespace BurntIcing
 				$attributeValue = static::getValueAtKeyPathInArray($keyPath, $sourceValue);
 			elseif (is_array($attributeValueRepresentation)):
 				$attributeOptions = $attributeValueRepresentation;
-			
-				if (isset($attributeOptions['checkIsPresent'])):
-					$checkIsPresentInfo = $attributeOptions['checkIsPresent'];
-					$valueToCheck = static::getAttributeValueForInfoAndSourceValue($checkIsPresentInfo, $sourceValue);
-					if (!isset($valueToCheck)):
-						return null;
-					endif;
+				
+				if (!static::checkOptionsShouldShow($attributeOptions, $sourceValue)):
+					return null;
 				endif;
 			
 				if (isset($attributeOptions['text'])):
@@ -84,6 +101,10 @@ namespace BurntIcing
 	
 		public static function createGlazeElementForElementOptions($elementOptions, $sourceValue)
 		{
+			if (!static::checkOptionsShouldShow($elementOptions, $sourceValue)):
+				return null;
+			endif;
+			
 			// Referenced Element
 			if (isset($elementOptions['placeOriginalElement'])):
 				return burntCheck($sourceValue['originalElement']);
@@ -106,18 +127,7 @@ namespace BurntIcing
 				$childrenPrepared = array();
 				if (isset($elementOptions['children'])):
 					$childrenOptions = $elementOptions['children'];
-				
-					// TODO
 					$childrenPrepared = static::createGlazeContentForHTMLRepresentationAndValue($childrenOptions, $sourceValue);
-				
-					/*
-					foreach ($childrenOptions as $childElementOptions):
-						$childPrepared = static::createGlazeElementForElementOptions($childElementOptions, $sourceValue);
-						if (isset($childPrepared)):
-							$childrenPrepared[] = $childPrepared;
-						endif;
-					endforeach;
-					*/
 				endif;
 			
 				$attributesReady['tagName'] = $tagName;

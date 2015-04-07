@@ -17,7 +17,7 @@ $contentJSON = json_decode(file_get_contents(__DIR__. '/content.icing'), true);
 
 $specs = new Specs($specsJSON);
 $HTMLTransformer = HTMLTransformer::newTransformerWithSpecs($specs);
-$HTMLTransformer->displayHTMLFromContentJSON($contentJSON);
+$HTMLTransformer->displayHTMLFromDocumentJSON($contentJSON);
 
 /*
 $html = GlazePrepare::element('html');

@@ -121,5 +121,15 @@ namespace BurntIcing
 			$mainElement = $this->createGlazeElementForContentJSON($contentJSON);
 			$mainElement->serve();
 		}
+		
+		public function displayHTMLFromDocumentJSON($documentJSON, $options = null)
+		{
+			$sectionID = burntCheck($options['sectionID'], 'main');
+			$sections = $documentJSON['sections'];
+			$contentJSON = $sections[$sectionID];
+			
+			$mainElement = $this->createGlazeElementForContentJSON($contentJSON);
+			$mainElement->serve();
+		}
 	}
 }

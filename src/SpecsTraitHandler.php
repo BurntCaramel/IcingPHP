@@ -12,6 +12,7 @@ namespace BurntIcing
 	use BurntCaramel\Glaze\Serve as GlazeServe;
 	
 	require_once(__DIR__ . '/TraitHandler.php');
+	require_once(__DIR__ . '/HTMLRepresentationAssistant.php');
 	
 	class SpecsTraitHandler
 	{
@@ -49,7 +50,7 @@ namespace BurntIcing
 				if (isset($traitOptions['innerHTMLRepresentation'])):
 					$HTMLRepresentation = $traitOptions['innerHTMLRepresentation'];
 					if (burntCheck($HTMLRepresentation, false) !== false):
-						$glazeItem = HTMLRepresentationDisplayer::createGlazeContentForHTMLRepresentationAndValue(
+						$glazeItem = HTMLRepresentationAssistant::createGlazeContentForHTMLRepresentationAndValue(
 							$HTMLRepresentation, $valueForRepresentation
 						);
 					else:
