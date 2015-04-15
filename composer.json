@@ -1,6 +1,6 @@
 {
 	"name": "burntcaramel/icing",
-	"description": "Display and customize icing content.",
+	"description": "Display and customize structured icing content.",
 	"keywords": ["icing", "content", "display", "html", "text", "glaze"],
 	"license": "MIT",
 	"require": {
@@ -9,7 +9,7 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"BurntIcing": "src/"
+			"BurntIcing\\": "src/"
 		}
 	},
 	"config": {

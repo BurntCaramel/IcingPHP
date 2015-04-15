@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "054f0fdd60692df5355ef297b9b1385a",
+    "hash": "f0ae8020248eb864774834cb71842e24",
     "packages": [
         {
             "name": "burntcaramel/glaze",
-            "version": "2.0.0-beta4",
+            "version": "2.0.0-beta7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BurntCaramel/glaze.git",
-                "reference": "1b51555fe7491bb0ff54b4bc14b2171194ae0b91"
+                "reference": "caf050602e8cd3356925619af1073a698791f7e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BurntCaramel/glaze/zipball/1b51555fe7491bb0ff54b4bc14b2171194ae0b91",
-                "reference": "1b51555fe7491bb0ff54b4bc14b2171194ae0b91",
+                "url": "https://api.github.com/repos/BurntCaramel/glaze/zipball/caf050602e8cd3356925619af1073a698791f7e5",
+                "reference": "caf050602e8cd3356925619af1073a698791f7e5",
                 "shasum": ""
             },
             "require": {
@@ -25,8 +25,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "BurntCaramel\\Glaze": "src/"
+                "psr-4": {
+                    "BurntCaramel\\Glaze\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -42,7 +42,7 @@
                 "html",
                 "text"
             ],
-            "time": "2015-03-28 04:15:11"
+            "time": "2015-04-15 09:16:32"
         }
     ],
     "packages-dev": [],
