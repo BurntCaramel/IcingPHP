@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d4401f60ad37debe4f478d5a7fc962d9",
+    "hash": "054f0fdd60692df5355ef297b9b1385a",
     "packages": [
         {
             "name": "burntcaramel/glaze",
-            "version": "2.0.0-beta2",
+            "version": "2.0.0-beta4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BurntCaramel/glaze.git",
-                "reference": "49b1c95645b143428ca889320d11930a0cacb387"
+                "reference": "1b51555fe7491bb0ff54b4bc14b2171194ae0b91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BurntCaramel/glaze/zipball/49b1c95645b143428ca889320d11930a0cacb387",
-                "reference": "49b1c95645b143428ca889320d11930a0cacb387",
+                "url": "https://api.github.com/repos/BurntCaramel/glaze/zipball/1b51555fe7491bb0ff54b4bc14b2171194ae0b91",
+                "reference": "1b51555fe7491bb0ff54b4bc14b2171194ae0b91",
                 "shasum": ""
             },
             "require": {
@@ -39,11 +39,10 @@
                 "display",
                 "escaping",
                 "glaze",
-                "glazy",
                 "html",
                 "text"
             ],
-            "time": "2015-03-21 02:59:19"
+            "time": "2015-03-28 04:15:11"
         }
     ],
     "packages-dev": [],
@@ -52,6 +51,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.3.0"
+    },
     "platform-dev": []
 }
