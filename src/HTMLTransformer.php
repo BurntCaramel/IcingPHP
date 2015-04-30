@@ -51,7 +51,7 @@ namespace BurntIcing
 			$HTMLTransformer->displayHTMLFromContentJSON($postContent);
 		}
 	
-		public function appendToGlazeItemFromContentJSON($glazeItem, $contentJSON)
+		public function appendToGlazeItemFromContentJSON($glazeItem, $contentJSON, $generalOptions = null)
 		{
 			if (empty($contentJSON)):
 				return;
@@ -88,7 +88,7 @@ namespace BurntIcing
 				// Normal block
 				else:
 					// Create element for block
-					$elementForBlock = $blockHandler->createGlazeItemForBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions);
+					$elementForBlock = $blockHandler->createGlazeItemForBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions);
 					if (isset($subsectionHandler)):
 						// Get subsection to wrap element
 						$elementForBlock = $subsectionHandler->modifyOrWrapGlazeItemForBlockJSONInSubsectionOfType($elementForBlock, $blockJSON, $currentSubsectionType);
@@ -106,16 +106,19 @@ namespace BurntIcing
 			endif;
 		}
 	
-		public function createGlazeElementForContentJSON($contentJSON, $sectionID = 'main')
+		public function createGlazeElementForContentJSON($contentJSON, $options = null)
 		{
+			$sectionID = burntCheck($options['sectionID'], 'main');
+			
 			$mainElement = GlazePrepare::element(array(
 				'tagName' => 'div',
 				'class' => "icingSection-{$sectionID}"
 			));
-			$this->appendToGlazeItemFromContentJSON($mainElement, $contentJSON);
+			$this->appendToGlazeItemFromContentJSON($mainElement, $contentJSON, $options);
 			return $mainElement;
 		}
-	
+		
+		// DEPRECATED, use displayHTMLFromDocumentJSON()
 		public function displayHTMLFromContentJSON($contentJSON)
 		{
 			$mainElement = $this->createGlazeElementForContentJSON($contentJSON);
@@ -128,7 +131,7 @@ namespace BurntIcing
 			$sections = $documentJSON['sections'];
 			$contentJSON = $sections[$sectionID];
 			
-			$mainElement = $this->createGlazeElementForContentJSON($contentJSON);
+			$mainElement = $this->createGlazeElementForContentJSON($contentJSON, $options);
 			$mainElement->serve();
 		}
 	}

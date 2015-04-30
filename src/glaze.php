@@ -4,5 +4,5 @@
 ** http://www.burntcaramel.com/icing/
 */
 
-require 'vendor/autoload.php';
+//require 'vendor/autoload.php';
 //require_once(__DIR__. '/../vendor/burntcaramel/glaze/all.php');

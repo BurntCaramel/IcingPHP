@@ -26,18 +26,15 @@ namespace BurntIcing
 			parent::__construct($traitHandler);
 		}
 	
-		public function createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, $innerGlazeItem, $blockCreationOptions)
+		public function createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, $innerGlazeItem, $blockCreationOptions, $generalOptions)
 		{
 			$specs = $this->specs;
 			$blockTypeOptions = $specs->findParticularBlockTypeOptionsForBlockJSON($blockJSON);
 		
+			$valueForRepresentation = array();
 			if (isset($blockTypeOptions['fields'])):
 				$value = burntCheck($blockJSON['value'], array());
-				$valueForRepresentation = array(
-					'fields' => $value
-				);
-			else:
-				$valueForRepresentation = null;
+				$valueForRepresentation['fields'] = $value;
 			endif;
 		
 			if (!isset($innerGlazeItem)):
@@ -58,17 +55,22 @@ namespace BurntIcing
 			return $innerGlazeItem;
 		}
 	
-		public function createGlazeItemForParticularWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions)
+		public function createGlazeItemForParticularWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
 		{
-			return $this->createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, null, $blockCreationOptions);
+			return $this->createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, null, $blockCreationOptions, $generalOptions);
+		}
+		
+		public function createGlazeItemForMediaWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
+		{
+			return $this->createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, null, $blockCreationOptions, $generalOptions);
 		}
 	
-		public function createGlazeItemForTextItemBasedBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions)
+		public function createGlazeItemForTextItemBasedBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
 		{
 			$textItems = burntCheck($blockJSON['textItems'], array());
 			$innerGlazeItem = $textItemHandler->createGlazeContentForArrayOfTextItemsJSON($textItems, $blockJSON);
 		
-			return $this->createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, $innerGlazeItem, $blockCreationOptions);
+			return $this->createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, $innerGlazeItem, $blockCreationOptions, $generalOptions);
 		}
 	}
 }

@@ -20,27 +20,40 @@ namespace BurntIcing
 		{
 			$this->blockTraitHandler = $blockTraitHandler;
 		}
-	
-		public function createGlazeItemForParticularWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions)
+		
+		public function createGlazeItemForTextItemBasedBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
 		{
 			// Needs subclassing.
 			return null;
 		}
 	
-		public function createGlazeItemForTextItemBasedBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions)
+		public function createGlazeItemForParticularWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
+		{
+			// Needs subclassing.
+			return null;
+		}
+		
+		public function createGlazeItemForMediaWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
 		{
 			// Needs subclassing.
 			return null;
 		}
 	
-		public function createGlazeItemForBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions = null)
+		public function createGlazeItemForBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions = null, $generalOptions = null)
 		{
+			$blockAdjuster = burntCheck($generalOptions['blockAdjuster']);
+			if (isset($blockAdjuster)):
+				$blockJSON = $blockAdjuster->adjustBlockJSON($blockJSON);
+			endif;
+			
 			$typeGroup = burntCheck($blockJSON['typeGroup'], 'text');
 		
-			if ($typeGroup === 'particular' || $typeGroup === 'media'):
-				return $this->createGlazeItemForParticularWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions);
+			if ($typeGroup === 'particular'):
+				return $this->createGlazeItemForParticularWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions);
+			elseif ($typeGroup === 'media'):
+				return $this->createGlazeItemForMediaWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions);
 			else:
-				return $this->createGlazeItemForTextItemBasedBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions);
+				return $this->createGlazeItemForTextItemBasedBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions);
 			endif;
 		}
 	}
