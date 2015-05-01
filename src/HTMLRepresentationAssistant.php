@@ -53,11 +53,14 @@ namespace BurntIcing
 		{
 			$attributeValue = null;
 		
+			// String
 			if (is_string($attributeValueRepresentation)):
 				$attributeValue = $attributeValueRepresentation;
+			// Ordered array
 			elseif (is_array($attributeValueRepresentation) && isset($attributeValueRepresentation[0])):
 				$keyPath = $attributeValueRepresentation;
 				$attributeValue = static::getValueAtKeyPathInArray($keyPath, $sourceValue);
+			// Associative array
 			elseif (is_array($attributeValueRepresentation)):
 				$attributeOptions = $attributeValueRepresentation;
 				
@@ -66,7 +69,7 @@ namespace BurntIcing
 				endif;
 			
 				if (isset($attributeOptions['text'])):
-					$attributeValue = $attributeOptions['text'];
+					$attributeValue = static::getAttributeValueForInfoAndSourceValue($attributeOptions['text'], $sourceValue);
 				elseif (isset($attributeOptions['join'])):
 					$join = $attributeOptions['join'];
 					$pieces = array();

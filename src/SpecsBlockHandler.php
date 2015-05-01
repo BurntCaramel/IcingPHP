@@ -54,6 +54,14 @@ namespace BurntIcing
 		
 			return $innerGlazeItem;
 		}
+		
+		public function createGlazeItemForTextItemBasedBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
+		{
+			$textItems = burntCheck($blockJSON['textItems'], array());
+			$innerGlazeItem = $textItemHandler->createGlazeContentForArrayOfTextItemsJSON($textItems, $blockJSON);
+		
+			return $this->createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, $innerGlazeItem, $blockCreationOptions, $generalOptions);
+		}
 	
 		public function createGlazeItemForParticularWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
 		{
@@ -63,14 +71,6 @@ namespace BurntIcing
 		public function createGlazeItemForMediaWithBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
 		{
 			return $this->createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, null, $blockCreationOptions, $generalOptions);
-		}
-	
-		public function createGlazeItemForTextItemBasedBlockJSON($blockJSON, $textItemHandler, $blockCreationOptions, $generalOptions = null)
-		{
-			$textItems = burntCheck($blockJSON['textItems'], array());
-			$innerGlazeItem = $textItemHandler->createGlazeContentForArrayOfTextItemsJSON($textItems, $blockJSON);
-		
-			return $this->createGlazeItemForBlockJSONAndInnerGlazeItem($blockJSON, $innerGlazeItem, $blockCreationOptions, $generalOptions);
 		}
 	}
 }
